@@ -1,0 +1,22 @@
+Docker user different network drivers to control how containers communicate. 
+There are 3 default networks in docker. These can be seen after installing docker and running, docker network ls.
+They are:
+1. Bridge Network
+2. Host Network
+3. None Network.
+There is another Network widely used in docker,
+4. Custom Bridge Network
+
+By going through each of them we can get the clear picture of how the networks work in Docker.
+
+--------------------( 1 ) Bridge Network--------------------
+This is the default network for containers. It creates an internal private network on the host. Containers on this network can communicate with each other via IP addresses, but cannot resolve each other by container name. They access the outside world via NAT(Network Address Translation)
+
+--------------------( 2 ) Host Network--------------------
+This removes network isolation between the container and the Docker host. The container uses the host's networking directly. Port mapping is not required because the container shares the host's IP addresses.
+
+--------------------( 3 ) None Network--------------------
+The none network driver completely disables networking for the container. The container only has a loopback interface (lo), meaning it cannot connect to the outside world or other containers. This is highly secure and used for offline batch processing.
+
+--------------------( 4 ) Custom Bridge Network--------------------
+This is the recommended approach for container communication. Unlike the default bridge, custom bridge network provide automatic DNS resolution. Containers can ping each other by their container names. making application stacks (like a web server talking to a database) highly reliable.
